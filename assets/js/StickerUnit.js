@@ -43,12 +43,19 @@ class StickerUnit {
                 transform-origin: bottom left;
                 transform: rotate( ${this.fragmentInterval * i}deg );
             `;
-            f.style.cssText += i == this.fragmentsNum.length - 1 ? 'z-index: 5' : 'z-index: 10';
+            // f.style.cssText = `
+            //     width: 71%;
+            //     height: 71%;
+            //     position: absolute;
+            //     bottom: 50%;
+            //     left: 50%;
+            //     transform-origin: bottom left;
+            // `;
+            f.style.cssText += i == this.fragmentsNum - 1 ? 'clip-path: polygon(0% 0%, 100% 0%, 0% 100%)' : '';
             this.fragments.push(f);
             this.wrapper.appendChild(f);
-            
         }
-        this.fragmentsFill = ["red", "blue", "yellow", "green", "pink", "grey", "white", "grass"];
+        this.fragmentsFill = ["red", "blue", "yellow", "green", "pink", "grey", "white", "purple"];
     }
     getLengthByDegree(degree){
         return acos(degree) * this.size / 2;
@@ -66,7 +73,6 @@ class StickerUnit {
                 console.log("!! " + idx);
                 continue;
             }
-            console.log(this.fragments[idx]);
             this.fragments[idx].style.backgroundColor = this.fragmentsFill[i];
         }
     }
