@@ -72,7 +72,7 @@ class StickerUnit {
     }
     drawTriangle(ctx, deg){
         ctx.beginPath();
-        deg = deg * Math.PI * 2 / 360;
+        // deg = deg * Math.PI * 2 / 360;
         let point1 = this.getAxisByDegree(deg);
         let point2 = this.getAxisByDegree(deg + this.degreeInterval);
         let points = [ 

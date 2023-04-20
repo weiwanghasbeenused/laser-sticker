@@ -42,15 +42,16 @@ class Sticker {
 
     draw(b, g){
         let counter = 0;
+        let beta = b * Math.PI * 2 / 360;
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
                 let idx = i * this.unitAmount.h + j;
                 this.context.fillStyle = "blue";
-                this.units[idx].draw(this.context, b);
+                this.units[idx].draw(this.context, beta);
                 this.context.fillStyle = "white";
-                this.units[idx].draw(this.context, b + 60);
+                this.units[idx].draw(this.context, beta + 60);
                 counter++;
             }
         }
