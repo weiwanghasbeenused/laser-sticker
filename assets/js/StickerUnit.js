@@ -127,6 +127,8 @@ class StickerUnit {
         let idx = parseInt(deg / this.fragmentInterval);
         if(idx == this.beginIdx) return;
         this.beginIdx = idx;
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, this.size, this.size);
         // console.log(l);
         for(let i = 0; i < this.fragments.length; i++){
             // ctx.save();
