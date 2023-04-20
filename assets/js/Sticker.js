@@ -2,6 +2,7 @@ class Sticker {
     constructor(canvas){
         this.canvas = typeof canvas == "string" ? document.getElementById(canvas) : canvas;
         this.units = [];
+        this.backgroundColor = "black";
         this.init();
     }
     init(){
@@ -41,7 +42,8 @@ class Sticker {
     }
 
     draw(b, g){
-        let counter = 0;
+        this.context.fillStyle = this.backgroundColor;
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         let beta = b * Math.PI * 2 / 360;
         for(let i = 0; i < this.unitAmount.v; i++)
         {
@@ -52,9 +54,7 @@ class Sticker {
                 this.units[idx].draw(this.context, beta);
                 this.context.fillStyle = "white";
                 this.units[idx].draw(this.context, beta + 60);
-                counter++;
             }
         }
-        // console.log(counter);
     }
 }
