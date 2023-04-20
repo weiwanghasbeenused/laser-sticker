@@ -71,7 +71,6 @@ class StickerUnit {
         }
     }
     draw(deg = 0){
-        console.log('stickerUnit draw');
         this.drawFragments(deg);
     }
 }

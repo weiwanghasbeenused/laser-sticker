@@ -53,8 +53,10 @@ class Sticker {
 
     draw(b=0, g=0){
         console.log('sticker draw');
-        let beta = b * Math.PI * 2 / 360;
-        let gamma = g * Math.PI * 2 / 360;
+        // let beta = b * Math.PI * 2 / 360;
+        // let gamma = g * Math.PI * 2 / 360;
+        let beta = b;
+        let gamma = g;
         let deg = (beta + gamma) * 8;
         if(this.fragmentIdx === parseInt(deg / this.unitFragmentInterval)) return;
         this.fragmentIdx = parseInt(deg / this.unitFragmentInterval);
