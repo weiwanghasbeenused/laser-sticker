@@ -67,7 +67,7 @@ class Sticker {
         // this.context.restore();
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
-        let deg = (beta + gamma) * 4;
+        let deg = (beta + gamma);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
