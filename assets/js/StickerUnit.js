@@ -11,7 +11,6 @@ class StickerUnit {
             "x": this.position.x + this.size / 2,
             "y": this.position.y + this.size / 2
         };
-        console.log(this.center.y);
         this.degreeInterval = Math.PI * 2 / 360 * this.degreeInterval; // deg to rad
     }
     getLengthByDegree(degree){

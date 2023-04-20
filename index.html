@@ -13,11 +13,14 @@
                 <canvas id="canvas"></canvas>
             </div>
         </main>
-        <!-- <div id="permission-wrapper" class="fullViewport">
+        <div id="permission-wrapper" class="fullViewport">
             <div id="permission-message">
-                <p>This website would like to access the orientation of your device</p>
+                <p>This website would like to access the orientation of your device.</p>
+                <div class="btns-wrapper">
+                <button id="deny-permission-btn" class="btn">Deny</button><button id="accept-permission-btn" class="btn">Accept</button>
+                </div>
             </div>
-        </div> -->
+        </div>
     </div>
     <script>
         let canvas = document.getElementById("canvas");
@@ -32,7 +35,7 @@
             let ticking = false;
             function permission () {
                 if ( typeof( DeviceOrientationEvent ) == "undefined" || typeof( DeviceOrientationEvent.requestPermission ) !== "function" ){
-                    alert( "DeviceMotionEvent is not defined" );
+                    // alert( "DeviceMotionEvent is not defined" );
                     return null;
                 }
                 console.log("permission");
@@ -59,8 +62,8 @@
                 })
                 .catch( console.error );
             }
-            // sLanding_background_holder.addEventListener( "click", permission );
-            permission();
+            const sAccept_permission_btn = document.getElementById("accept-permission-btn");
+            sAccept_permission_btn.addEventListener( "click", permission );
         }
     </script>
 </body>
