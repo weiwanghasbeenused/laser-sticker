@@ -4,6 +4,20 @@ class Sticker {
         this.units = [];
         this.backgroundColor = "black";
         this.scale = window.devicePixelRatio;
+        this.shines = [
+            { 
+                'fill': 'blue',
+                'deg': 15 * Math.PI * 2 / 360
+            }, 
+            {
+                'fill': 'white',
+                'deg': 130 * Math.PI * 2 / 360
+            }, 
+            {
+                'fill': 'purple',
+                'deg': 230 * Math.PI * 2 / 360
+            }
+        ];
         this.init();
     }
     init(){
@@ -47,35 +61,26 @@ class Sticker {
         return { "h": parseInt(windowWidth * this.scale / unitSize), "v": parseInt(windowHeight * this.scale / unitSize) };
     }
 
-    draw(b, g){
+    draw(b=0, g=0){
+        // this.context.save();
         this.context.fillStyle = this.backgroundColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // this.context.restore();
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
         let deg = (beta + gamma) / 2;
-        let shines = [
-            { 
-                'fill': 'blue',
-                'deg': deg + 15 * Math.PI * 2 / 360
-            }, {
-                'fill': 'white',
-                'deg': deg + 130 * Math.PI * 2 / 360
-            }, {
-                'fill': 'purple',
-                'deg': deg + 230 * Math.PI * 2 / 360
-            }
-        ];
+        let shines_temp = this.shines;
+        
+        for(let k = 0; k < shines_temp.length; k++)
+        {
+            shines_temp[k].deg += deg;
+        }
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
                 let idx = i * this.unitAmount.h + j;
-                for(let k = 0; k < shines.length; k++)
-                {
-                    this.context.fillStyle = shines[k].fill;
-                    this.units[idx].draw(this.context, shines[k].deg);
-                }
-                
+                this.units[idx].drawShines(this.context, shines_temp);
             }
         }
     }
