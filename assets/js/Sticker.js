@@ -69,13 +69,15 @@ class Sticker {
         let gamma = g * Math.PI * 2 / 360;
         let deg = (beta + gamma) / 2;
         console.log(this.shines);
-        let shines_temp = this.shines;
+        let shines_temp = [];
         
-        for(let k = 0; k < shines_temp.length; k++)
+        for(let i = 0; i < this.shines.length; i++)
         {
-            shines_temp[k].deg += deg;
+            shines_temp[i] = {...this.shines[i]};
+            shines_temp[i].deg += deg;
         }
         // console.log(shines_temp);
+        console.log(this.shines);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
