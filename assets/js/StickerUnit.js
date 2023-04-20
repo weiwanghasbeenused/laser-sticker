@@ -127,13 +127,20 @@ class StickerUnit {
         for(let i = 0; i < this.fragments.length; i++){
             // ctx.save();
             // console.log(idx);
+            idx = (idx + 1) % this.fragmentsNum;
+            if(!this.fragments[idx])
+            {
+                console.log("!! " + idx);
+                continue;
+            }
             ctx.beginPath();
             ctx.moveTo(this.center.x, this.center.y);
             ctx.fillStyle = this.fragmentsFill[i];
+            
             ctx.arc(this.center.x, this.center.y, l, this.fragments[idx]["from"], this.fragments[idx]["to"]);
             ctx.closePath();
             ctx.fill();
-            idx = (idx + 1) % this.fragmentsNum;
+            
             // ctx.restore();
         }
     }
