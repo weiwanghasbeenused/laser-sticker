@@ -61,14 +61,11 @@ class Sticker {
     }
 
     draw(b=0, g=0){
-        // this.context.save();
         this.context.fillStyle = this.backgroundColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        // this.context.restore();
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
         let deg = (beta + gamma);
-        console.log(this.shines);
         let shines_temp = [];
         
         for(let i = 0; i < this.shines.length; i++)
@@ -76,8 +73,6 @@ class Sticker {
             shines_temp[i] = {...this.shines[i]};
             shines_temp[i].deg += deg;
         }
-        // console.log(shines_temp);
-        console.log(this.shines);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
