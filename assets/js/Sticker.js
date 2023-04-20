@@ -61,26 +61,36 @@ class Sticker {
     }
 
     draw(b=0, g=0){
+        // this.context.save();
         this.context.fillStyle = this.backgroundColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // this.context.restore();
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
         let deg = (beta + gamma);
-        let shines_temp = [];
-        
-        for(let i = 0; i < this.shines.length; i++)
-        {
-            shines_temp[i] = {...this.shines[i]};
-            shines_temp[i].deg += deg;
-        }
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
                 let idx = i * this.unitAmount.h + j;
-                this.units[idx].draw(this.context);
+                this.units[idx].draw(this.context, deg);
             }
         }
-        // this.units[0].draw(this.context);
+        // let shines_temp = [];
+        
+        // for(let i = 0; i < this.shines.length; i++)
+        // {
+        //     shines_temp[i] = {...this.shines[i]};
+        //     shines_temp[i].deg += deg;
+        // }
+        // for(let i = 0; i < this.unitAmount.v; i++)
+        // {
+        //     for(let j = 0; j < this.unitAmount.h; j++)
+        //     {
+        //         let idx = i * this.unitAmount.h + j;
+        //         this.units[idx].drawShines(this.context, shines_temp);
+        //     }
+        // }
+        
     }
 }
