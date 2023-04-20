@@ -1,0 +1,33 @@
+*{margin:0; box-sizing: border-box;}
+
+.fullViewport
+{
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+}
+.fullHeight{
+    height: 100vh;
+}
+#frame
+{
+    background-color: #000;
+}
+#canvas-wrapper
+{
+    position: relative;
+    
+    /* width: 100vh; */
+    /* margin: 0 auto; */
+    /* border: 1px solid #00f; */
+}
+#canvas
+{
+    /* width: 100%; */
+    /* height: 100%; */
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    /* border: 1px solid #00f; */
+}
