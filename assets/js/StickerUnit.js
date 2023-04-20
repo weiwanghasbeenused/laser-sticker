@@ -129,7 +129,7 @@ class StickerUnit {
             console.log(idx);
             ctx.beginPath();
             ctx.moveTo(this.center.x, this.center.y);
-            ctx.fillStyle = this.fragmentsFill[idx];
+            ctx.fillStyle = this.fragmentsFill[i];
             ctx.arc(this.center.x, this.center.y, l, this.fragments[idx]["from"], this.fragments[idx]["to"]);
             ctx.closePath();
             ctx.fill();
