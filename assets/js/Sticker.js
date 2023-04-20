@@ -67,7 +67,7 @@ class Sticker {
         // this.context.restore();
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
-        let deg = (beta + gamma) / 2;
+        let deg = (beta + gamma);
         console.log(this.shines);
         let shines_temp = [];
         

@@ -31,13 +31,13 @@ class StickerUnit {
         else if( degree > Math.PI * 1 / 4 && degree <= Math.PI * 2 / 4 ) {
             // 45 - 90
             degree = Math.PI / 2 - degree;
-            x += Math.atan(degree) * l;
+            x += Math.tan(degree) * l;
             y -= l;
         }
         else if( degree > Math.PI * 2 / 4 && degree <= Math.PI * 3 / 4 ) {
             // 90 - 135
             degree = degree - Math.PI / 2;
-            x -= Math.atan(degree) * l;
+            x -= Math.tan(degree) * l;
             y -= l;
         }
         else if( degree > Math.PI * 3 / 4 && degree <= Math.PI ) {
