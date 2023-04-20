@@ -28,11 +28,7 @@
 {
     margin-top: 20px;
 }
-#deny-permission-btn
-{
-    background-color: #f00;
-    color: #fff;
-}
+
 #frame
 {
     background-color: #000;
@@ -55,6 +51,7 @@
     left: 0;
     background-color: rgba(255, 255, 255, 0.9);
     z-index: 1000;
+    display: none;
 }
 
 #permission-message
@@ -65,4 +62,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 2em;
+}
+.viewing-permission-requirement #permission-wrapper
+{
+    display: block;
+}
+#deny-permission-btn
+{
+    background-color: #f00;
+    color: #fff;
 }

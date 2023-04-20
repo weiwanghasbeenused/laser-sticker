@@ -7,7 +7,7 @@
     <script type="text/javascript" src="assets/js/Sticker.js"></script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="viewing-permission-requirement">
         <main id="frame" class="fullHeight fullWidth">
             <div id="canvas-wrapper" class="fullHeight">
                 <canvas id="canvas"></canvas>
@@ -25,6 +25,7 @@
     <script>
         let canvas = document.getElementById("canvas");
         let sticker = new Sticker(canvas);
+        let sApp = document.getElementById("app");
         sticker.draw(30);
         
         if (window.DeviceOrientationEvent) {
@@ -44,6 +45,7 @@
                 .then( response => {
                     // (optional) Do something after API prompt dismissed.
                     if ( response == "granted" ) {
+                        sApp.classList.remove('viewing-permission-requirement');
                         window.addEventListener('deviceorientation', function(event){
                             if(!ticking) {
                                 requestAnimationFrame(function(){
