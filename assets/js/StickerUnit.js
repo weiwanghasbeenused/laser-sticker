@@ -9,7 +9,9 @@ class StickerUnit {
         this.fragmentsNum = 8;
         this.fragmentInterval = Math.PI * 2;
         this.fragmentsFill = [];
+        this.beginIdx = 0;
         this.init();
+        
     }
     init(){
         this.center = {
@@ -122,7 +124,9 @@ class StickerUnit {
     drawFragments(ctx, deg){
         // console.log("drawFragments");
         let l = this.size * 1.414 / 2;
-        let idx = parseInt(deg / this.fragmentInterval);
+        let idx = parseInt(Math.abs(deg) / this.fragmentInterval);
+        if(idx == this.beginIdx) return;
+        this.beginIdx = idx;
         // console.log(l);
         for(let i = 0; i < this.fragments.length; i++){
             // ctx.save();
