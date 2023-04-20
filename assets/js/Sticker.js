@@ -56,13 +56,13 @@ class Sticker {
         let shines = [
             { 
                 'fill': 'blue',
-                'deg': 15 * Math.PI * 2 / 360
+                'deg': deg + 15 * Math.PI * 2 / 360
             }, {
                 'fill': 'white',
-                'deg': 130 * Math.PI * 2 / 360
+                'deg': deg + 130 * Math.PI * 2 / 360
             }, {
                 'fill': 'purple',
-                'deg': 230 * Math.PI * 2 / 360
+                'deg': deg + 230 * Math.PI * 2 / 360
             }
         ];
         for(let i = 0; i < this.unitAmount.v; i++)
