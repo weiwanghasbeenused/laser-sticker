@@ -39,6 +39,8 @@ class Sticker {
                 this.units.push(thisUnit);
             }
         }
+        this.unitFragmentInterval = this.units[0].fragmentInterval;
+        this.fragmentIdx = 0;
     }
     getStickerUnitSize(){
         let windowWidth  = window.innerWidth, 
@@ -68,6 +70,8 @@ class Sticker {
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
         let deg = (beta + gamma) * 8;
+        if(this.fragmentIdx == parseInt(deg / this.unitFragmentInterval)) return;
+        this.fragmentIdx = parseInt(deg / this.unitFragmentInterval);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
