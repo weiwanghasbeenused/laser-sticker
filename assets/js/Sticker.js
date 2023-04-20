@@ -18,6 +18,7 @@ class Sticker {
                 'deg': 230 * Math.PI * 2 / 360
             }
         ];
+        console.log(this.shines);
         this.init();
     }
     init(){
@@ -75,6 +76,7 @@ class Sticker {
         {
             shines_temp[k].deg += deg;
         }
+        console.log(shines_temp);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
