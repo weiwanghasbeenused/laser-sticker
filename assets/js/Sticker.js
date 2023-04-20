@@ -3,12 +3,18 @@ class Sticker {
         this.canvas = typeof canvas == "string" ? document.getElementById(canvas) : canvas;
         this.units = [];
         this.backgroundColor = "black";
+        this.scale = window.devicePixelRatio;
         this.init();
     }
     init(){
+        this.unitSizeRange = { 'min': 30 * this.scale, "max": 60 * this.scale };
         this.context = this.canvas.getContext("2d");
         this.unitSize = this.getStickerUnitSize();
+        console.log(this.unitSize);
         this.unitAmount = this.getStickerUnitAmount(this.unitSize);
+        console.log(this.unitAmount);
+        this.canvas.style.width = this.unitAmount.h * this.unitSize / this.scale + 'px';
+        this.canvas.style.height = this.unitAmount.v * this.unitSize / this.scale + 'px';
         this.canvas.width = this.unitAmount.h * this.unitSize;
         this.canvas.height = this.unitAmount.v * this.unitSize;
         for(let i = 0; i < this.unitAmount.v; i++)
@@ -25,10 +31,10 @@ class Sticker {
         let windowWidth  = window.innerWidth, 
             windowHeight = window.innerHeight;
         let refSide = windowWidth > windowHeight ? windowHeight : windowWidth;
-        let range = { 'min': 30, "max": 40 };
+        refSide *= this.scale;
         let i = 0;
         let output = refSide / i;
-        while( output > range.max )
+        while( output > this.unitSizeRange.max )
         {
             i++;
             output = refSide / i;
@@ -38,7 +44,7 @@ class Sticker {
     getStickerUnitAmount(unitSize){
         let windowWidth  = window.innerWidth, 
             windowHeight = window.innerHeight;
-        return { "h": parseInt(windowWidth / unitSize), "v": parseInt(windowHeight / unitSize) };
+        return { "h": parseInt(windowWidth * this.scale / unitSize), "v": parseInt(windowHeight * this.scale / unitSize) };
     }
 
     draw(b, g){

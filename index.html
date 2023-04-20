@@ -23,9 +23,11 @@
         </div>
     </div>
     <script>
-        let canvas = document.getElementById("canvas");
+        const canvas = document.getElementById("canvas");
         let sticker = new Sticker(canvas);
-        let sApp = document.getElementById("app");
+        const sApp = document.getElementById("app");
+        const sAccept_permission_btn = document.getElementById("accept-permission-btn");
+        const sDeny_permission_btn = document.getElementById("deny-permission-btn");
         sticker.draw(30);
         
         if (window.DeviceOrientationEvent) {
@@ -68,9 +70,13 @@
                 })
                 .catch( console.error );
             }
-            const sAccept_permission_btn = document.getElementById("accept-permission-btn");
+            
             sAccept_permission_btn.addEventListener( "click", permission );
+            
         }
+        sDeny_permission_btn.addEventListener( "click", function(){
+            sApp.classList.remove('viewing-permission-requirement');
+        } );
     </script>
 </body>
 <script type="text/javascript" src="assets/js/wrapup.js"></script>
