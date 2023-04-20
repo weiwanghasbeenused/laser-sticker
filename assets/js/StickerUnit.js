@@ -123,17 +123,17 @@ class StickerUnit {
         console.log("drawFragments");
         let l = this.size * 1.414 / 2;
         let idx = parseInt(deg / this.fragmentInterval);
-        console.log(idx);
         // console.log(l);
         for(let i = 0; i < this.fragments.length; i++){
             // ctx.save();
+            console.log(idx);
             ctx.beginPath();
             ctx.moveTo(this.center.x, this.center.y);
             ctx.fillStyle = this.fragmentsFill[idx];
             ctx.arc(this.center.x, this.center.y, l, this.fragments[idx]["from"], this.fragments[idx]["to"]);
             ctx.closePath();
             ctx.fill();
-            idx = idx + 1 % this.fragmentsNum;
+            idx = (idx + 1) % this.fragmentsNum;
             // ctx.restore();
         }
     }
