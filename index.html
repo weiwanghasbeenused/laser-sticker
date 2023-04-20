@@ -22,18 +22,20 @@
     <script>
         let canvas = document.getElementById("canvas");
         let sticker = new Sticker(canvas);
-        sticker.draw();
+        sticker.draw(30);
         
         if (window.DeviceOrientationEvent) {
             // let beta_range = [-90, 90];
             // let gamma_range = [-45, 45];
             // beta_range.push(beta_range[1] - beta_range[0]);
             // gamma_range.push(gamma_range[1] - gamma_range[0]);
+            let ticking = false;
             function permission () {
                 if ( typeof( DeviceOrientationEvent ) == "undefined" || typeof( DeviceOrientationEvent.requestPermission ) !== "function" ){
                     alert( "DeviceMotionEvent is not defined" );
                     return null;
                 }
+                console.log("permission");
                 // (optional) Do something before API request prompt.
                 DeviceOrientationEvent.requestPermission()
                 .then( response => {
@@ -45,6 +47,7 @@
                                     //beta: x axis. In degree in the range [-180,180)
                                     //gamma y axis. In degree in the range [-90,90)
                                     let beta = event.beta * Math.PI * 2 / 360;
+                                    console.log(beta);
                                     sticker.draw(beta);
 
                                     ticking = false;
