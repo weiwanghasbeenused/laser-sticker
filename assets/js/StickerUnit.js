@@ -101,9 +101,6 @@ class StickerUnit {
     draw(ctx, deg = 40){
         // ctx.save();
         ctx.beginPath();
-        // ctx.rect(this.position.x, this.position.y, this.size, this.size);
-        // ctx.clip();
-        // this.degree = deg;
         this.drawTriangle(ctx, deg);
         ctx.closePath();
         // ctx.restore();
@@ -111,23 +108,13 @@ class StickerUnit {
     drawShines(ctx, s){
         ctx.save();
         ctx.beginPath();
-        
-        
-        // ctx.clip();
-        
-        
         ctx.rect(this.position.x, this.position.y, this.size, this.size);
         ctx.clip();
-        // ctx.closePath();
-        // ctx.fillStyle = 'red';
-        // ctx.fillRect(this.position.x-30, this.position.y-30, this.size - 10, this.size - 10);
         for(let i = 0; i < s.length; i++)
         {
-            // console.log(s[i].fill);
             ctx.fillStyle = s[i].fill;
             this.draw(ctx, s[i].deg);
         }
-        // ctx.fill();
         ctx.restore();
         
     }

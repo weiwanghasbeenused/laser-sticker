@@ -25,9 +25,7 @@ class Sticker {
         this.unitSizeRange = { 'min': 30 * this.scale, "max": 60 * this.scale };
         this.context = this.canvas.getContext("2d");
         this.unitSize = this.getStickerUnitSize();
-        console.log(this.unitSize);
         this.unitAmount = this.getStickerUnitAmount(this.unitSize);
-        console.log(this.unitAmount);
         this.canvas.style.width = this.unitAmount.h * this.unitSize / this.scale + 'px';
         this.canvas.style.height = this.unitAmount.v * this.unitSize / this.scale + 'px';
         this.canvas.width = this.unitAmount.h * this.unitSize;
@@ -70,13 +68,14 @@ class Sticker {
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
         let deg = (beta + gamma) / 2;
+        console.log(this.shines);
         let shines_temp = this.shines;
         
         for(let k = 0; k < shines_temp.length; k++)
         {
             shines_temp[k].deg += deg;
         }
-        console.log(shines_temp);
+        // console.log(shines_temp);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
