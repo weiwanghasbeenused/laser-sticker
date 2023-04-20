@@ -78,8 +78,9 @@ class Sticker {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
                 let idx = i * this.unitAmount.h + j;
-                this.units[idx].drawShines(this.context, shines_temp);
+                this.units[idx].draw(this.context);
             }
         }
+        // this.units[0].draw(this.context);
     }
 }

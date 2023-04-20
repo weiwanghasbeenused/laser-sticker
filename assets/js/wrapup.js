@@ -6,7 +6,9 @@ function adjustFullHeight(els){
         els[i].style.height = wh + 'px';
     }
 }
-
+window.addEventListener('load', function(){
+    adjustFullHeight(sFullHeight);
+});
 window.addEventListener('resize', function(){
-    // adjustFullHeight(sFullHeight);
+    adjustFullHeight(sFullHeight);
 });

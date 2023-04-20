@@ -5,6 +5,10 @@ class StickerUnit {
         this.scale = window.devicePixelRatio;
         // this.canvas = canvas;
         this.degreeInterval = 40; // deg
+        this.fragments = [];
+        this.fragmentsNum = 8;
+        this.fragmentInterval = Math.PI * 2;
+        this.fragmentsFill = [];
         this.init();
     }
     init(){
@@ -13,6 +17,24 @@ class StickerUnit {
             "y": this.position.y + this.size / 2
         };
         this.degreeInterval = Math.PI * 2 / 360 * this.degreeInterval; // deg to rad
+        this.fragmentInterval /= this.fragmentsNum;
+        this.prepareFragments();
+    }
+    prepareFragments(){
+        let a_interval = 1 / this.fragmentsNum * 2;
+        // console.log(a_interval);
+        for(let i = 0; i < this.fragmentsNum; i++)
+        {
+            let a = i <= this.fragmentsNum / 2 ? a_interval * i : 1 - a_interval * (i - this.fragmentsNum / 2);
+            // let a = a_interval * i;
+            this.fragments.push( 
+                { 
+                    "from": parseFloat((i * this.fragmentInterval).toFixed(3)),
+                    "to": parseFloat(((i+1) * this.fragmentInterval).toFixed(3))
+                } 
+            );
+            this.fragmentsFill.push("rgba(200, 200, 200, "+ a +")");
+        }
     }
     getLengthByDegree(degree){
         return acos(degree) * this.size / 2;
@@ -26,7 +48,6 @@ class StickerUnit {
             // 0 - 45
             x += l;
             y -= Math.tan(degree) * l;
-            // console.log(x, y);
         }
         else if( degree > Math.PI * 1 / 4 && degree <= Math.PI * 2 / 4 ) {
             // 45 - 90
@@ -98,24 +119,46 @@ class StickerUnit {
         }
         ctx.fill();
     }
-    draw(ctx, deg = 40){
-        // ctx.save();
-        ctx.beginPath();
-        this.drawTriangle(ctx, deg);
-        ctx.closePath();
-        // ctx.restore();
+    drawFragments(ctx, deg){
+        console.log("drawFragments");
+        let l = this.size * 1.414 / 2;
+        let idx = parseInt(deg / this.fragmentInterval);
+        console.log(idx);
+        // console.log(l);
+        for(let i = 0; i < this.fragments.length; i++){
+            // ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(this.center.x, this.center.y);
+            ctx.fillStyle = this.fragmentsFill[idx];
+            ctx.arc(this.center.x, this.center.y, l, this.fragments[idx]["from"], this.fragments[idx]["to"]);
+            ctx.closePath();
+            ctx.fill();
+            idx = idx + 1 % this.fragmentsNum;
+            // ctx.restore();
+        }
     }
-    drawShines(ctx, s){
+    draw(ctx, deg = 0){
         ctx.save();
-        ctx.beginPath();
+        
         ctx.rect(this.position.x, this.position.y, this.size, this.size);
         ctx.clip();
+        
+        // this.drawTriangle(ctx, deg);
+        console.log(deg);
+        this.drawFragments(ctx, deg);
+        ctx.restore();
+    }
+    drawShines(ctx, s){
+        // ctx.save();
+        // ctx.beginPath();
+        // ctx.rect(this.position.x, this.position.y, this.size, this.size);
+        // ctx.clip();
         for(let i = 0; i < s.length; i++)
         {
-            ctx.fillStyle = s[i].fill;
+            // ctx.fillStyle = s[i].fill;
             this.draw(ctx, s[i].deg);
         }
-        ctx.restore();
+        // ctx.restore();
         
     }
 }
