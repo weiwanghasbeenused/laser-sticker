@@ -10,9 +10,10 @@
 <body>
     <div id="app" class="viewing-permission-requirement">
         <main id="frame" class="fullHeight fullWidth">
-            <div id="canvas-wrapper" class="fullHeight">
+            <!-- <div id="canvas-wrapper" class="fullHeight">
                 <canvas id="canvas"></canvas>
-            </div>
+            </div> -->
+            <div id="sticker-container"></div>
         </main>
         <div id="permission-wrapper" class="fullHeight fullWidth">
             <div id="permission-message">
@@ -24,8 +25,10 @@
         </div>
     </div>
     <script>
-        const canvas = document.getElementById("canvas");
-        let sticker = new Sticker(canvas);
+        const isTest = true;
+        // const canvas = document.getElementById("canvas");
+        const stickerContainer = document.getElementById('sticker-container');
+        let sticker = new Sticker(stickerContainer);
         const sApp = document.getElementById("app");
         const sAccept_permission_btn = document.getElementById("accept-permission-btn");
         const sDeny_permission_btn = document.getElementById("deny-permission-btn");

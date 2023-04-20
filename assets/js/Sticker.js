@@ -1,52 +1,41 @@
 class Sticker {
-    constructor(canvas){
-        this.canvas = typeof canvas == "string" ? document.getElementById(canvas) : canvas;
+    constructor(container){
+        this.container = typeof canvas == "string" ? document.getElementById(container) : container;
         this.units = [];
         this.backgroundColor = "black";
-        this.scale = window.devicePixelRatio;
-        this.shines = [
-            { 
-                'fill': 'blue',
-                'deg': 15 * Math.PI * 2 / 360
-            }, 
-            {
-                'fill': 'white',
-                'deg': 130 * Math.PI * 2 / 360
-            }, 
-            {
-                'fill': 'purple',
-                'deg': 230 * Math.PI * 2 / 360
-            }
-        ];
-        console.log(this.shines);
         this.init();
     }
     init(){
-        this.unitSizeRange = { 'min': 30 * this.scale, "max": 60 * this.scale };
-        this.context = this.canvas.getContext("2d");
+        this.unitSizeRange = { 'min': 30, "max": 60 };
         this.unitSize = this.getStickerUnitSize();
         this.unitAmount = this.getStickerUnitAmount(this.unitSize);
-        this.canvas.style.width = this.unitAmount.h * this.unitSize / this.scale + 'px';
-        this.canvas.style.height = this.unitAmount.v * this.unitSize / this.scale + 'px';
-        this.canvas.width = this.unitAmount.h * this.unitSize;
-        this.canvas.height = this.unitAmount.v * this.unitSize;
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
                 let position = { "x": j * this.unitSize, "y": i * this.unitSize };
-                let thisUnit = new StickerUnit(this.unitSize, position);
+                let thisUnit = new StickerUnit(this.unitSize, this.container);
                 this.units.push(thisUnit);
             }
         }
+        this.container.style.cssText = `
+            width: ${this.unitAmount.h * this.unitSize}px;
+            height: ${this.unitAmount.v * this.unitSize}px;
+            display: flex;
+            flex-wrap: wrap;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+        `;
         this.unitFragmentInterval = this.units[0].fragmentInterval;
-        this.fragmentIdx = 0;
+        this.fragmentIdx = false;
     }
     getStickerUnitSize(){
         let windowWidth  = window.innerWidth, 
             windowHeight = window.innerHeight;
         let refSide = windowWidth > windowHeight ? windowHeight : windowWidth;
-        refSide *= this.scale;
         let i = 0;
         let output = refSide / i;
         while( output > this.unitSizeRange.max )
@@ -59,42 +48,24 @@ class Sticker {
     getStickerUnitAmount(unitSize){
         let windowWidth  = window.innerWidth, 
             windowHeight = window.innerHeight;
-        return { "h": parseInt(windowWidth * this.scale / unitSize), "v": parseInt(windowHeight * this.scale / unitSize) };
+        return { "h": Math.ceil(windowWidth / unitSize), "v": Math.ceil(windowHeight / unitSize) };
     }
 
     draw(b=0, g=0){
-        // this.context.save();
-        // this.context.fillStyle = this.backgroundColor;
-        // this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        // this.context.restore();
+        console.log('sticker draw');
         let beta = b * Math.PI * 2 / 360;
         let gamma = g * Math.PI * 2 / 360;
         let deg = (beta + gamma) * 8;
-        if(this.fragmentIdx == parseInt(deg / this.unitFragmentInterval)) return;
+        if(this.fragmentIdx === parseInt(deg / this.unitFragmentInterval)) return;
         this.fragmentIdx = parseInt(deg / this.unitFragmentInterval);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
-                let idx = i * this.unitAmount.h + j;
-                this.units[idx].draw(this.context, deg);
+                let idx = this.unitAmount.h * i + j;
+                this.units[idx].draw(deg);
             }
         }
-        // let shines_temp = [];
-        
-        // for(let i = 0; i < this.shines.length; i++)
-        // {
-        //     shines_temp[i] = {...this.shines[i]};
-        //     shines_temp[i].deg += deg;
-        // }
-        // for(let i = 0; i < this.unitAmount.v; i++)
-        // {
-        //     for(let j = 0; j < this.unitAmount.h; j++)
-        //     {
-        //         let idx = i * this.unitAmount.h + j;
-        //         this.units[idx].drawShines(this.context, shines_temp);
-        //     }
-        // }
         
     }
 }
