@@ -120,13 +120,13 @@ class StickerUnit {
         ctx.fill();
     }
     drawFragments(ctx, deg){
-        console.log("drawFragments");
+        // console.log("drawFragments");
         let l = this.size * 1.414 / 2;
         let idx = parseInt(deg / this.fragmentInterval);
         // console.log(l);
         for(let i = 0; i < this.fragments.length; i++){
             // ctx.save();
-            console.log(idx);
+            // console.log(idx);
             ctx.beginPath();
             ctx.moveTo(this.center.x, this.center.y);
             ctx.fillStyle = this.fragmentsFill[i];
@@ -144,7 +144,7 @@ class StickerUnit {
         ctx.clip();
         
         // this.drawTriangle(ctx, deg);
-        console.log(deg);
+        // console.log(deg);
         this.drawFragments(ctx, deg);
         ctx.restore();
     }
