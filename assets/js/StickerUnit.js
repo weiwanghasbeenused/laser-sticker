@@ -139,7 +139,7 @@ class StickerUnit {
     }
     draw(ctx, deg = 0){
         ctx.save();
-        
+        ctx.beginPath();
         ctx.rect(this.position.x, this.position.y, this.size, this.size);
         ctx.clip();
         
