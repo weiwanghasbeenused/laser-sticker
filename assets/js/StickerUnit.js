@@ -2,8 +2,9 @@ class StickerUnit {
     constructor(size, position, canvas){
         this.size = size;
         this.position = position;
+        this.scale = window.devicePixelRatio;
         // this.canvas = canvas;
-        this.degreeInterval = 25; // deg
+        this.degreeInterval = 40; // deg
         this.init();
     }
     init(){

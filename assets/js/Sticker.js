@@ -51,15 +51,31 @@ class Sticker {
         this.context.fillStyle = this.backgroundColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         let beta = b * Math.PI * 2 / 360;
+        let gamma = g * Math.PI * 2 / 360;
+        let deg = (beta + gamma) / 2;
+        let shines = [
+            { 
+                'fill': 'blue',
+                'deg': 15 * Math.PI * 2 / 360
+            }, {
+                'fill': 'white',
+                'deg': 130 * Math.PI * 2 / 360
+            }, {
+                'fill': 'purple',
+                'deg': 230 * Math.PI * 2 / 360
+            }
+        ];
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
                 let idx = i * this.unitAmount.h + j;
-                this.context.fillStyle = "blue";
-                this.units[idx].draw(this.context, beta);
-                this.context.fillStyle = "white";
-                this.units[idx].draw(this.context, beta + 60);
+                for(let k = 0; k < shines.length; k++)
+                {
+                    this.context.fillStyle = shines[k].fill;
+                    this.units[idx].draw(this.context, shines[k].deg);
+                }
+                
             }
         }
     }
