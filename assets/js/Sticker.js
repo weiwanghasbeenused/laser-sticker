@@ -6,7 +6,7 @@ class Sticker {
         this.init();
     }
     init(){
-        this.unitSizeRange = { 'min': 30, "max": 100 };
+        this.unitSizeRange = { 'min': 30, "max": 120 };
         this.unitSize = this.getStickerUnitSize();
         this.unitAmount = this.getStickerUnitAmount(this.unitSize);
         for(let i = 0; i < this.unitAmount.v; i++)
