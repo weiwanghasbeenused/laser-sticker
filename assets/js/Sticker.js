@@ -23,11 +23,8 @@ class Sticker {
             height: ${this.unitAmount.v * this.unitSize}px;
             display: flex;
             flex-wrap: wrap;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            overflow: hidden;
+            margin-left: ${ (window.innerWidth - this.unitAmount.h * this.unitSize) / 2 }px;
+            margin-top: ${ (window.innerHeight - this.unitAmount.v * this.unitSize) / 2 }px;
         `;
         this.unitFragmentInterval = this.units[0].fragmentInterval;
         this.fragmentIdx = false;
