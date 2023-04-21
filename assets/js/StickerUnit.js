@@ -12,7 +12,7 @@ class StickerUnit {
             overflow: hidden;  
         `;
         this.fragments = [];
-        this.fragmentsNum = 8;
+        this.fragmentsNum = 16;
         this.fragmentsFill = [];
         this.beginIdx = 0;
         this.init();
@@ -55,7 +55,24 @@ class StickerUnit {
             this.fragments.push(f);
             this.wrapper.appendChild(f);
         }
-        this.fragmentsFill = ["red", "blue", "yellow", "green", "pink", "grey", "white", "purple"];
+        this.fragmentsFill = [
+            "rbga(235,170,205,1)", 
+            "rbga(245,255,75,1)", 
+            "rbga(0,240,220,1)", 
+            "rbga(75,125,165,1)", 
+            "rbga(100,125,130,1)", 
+            "rbga(75,90,85,1)", 
+            "rbga(100,125,130,1)", 
+            "rbga(75,125,165,1)",
+            "rbga(235,170,205,1)", 
+            "rbga(245,255,75,1)", 
+            "rbga(0,240,220,1)", 
+            "rbga(75,125,165,1)", 
+            "rbga(100,125,130,1)", 
+            "rbga(75,90,85,1)", 
+            "rbga(100,125,130,1)", 
+            "rbga(75,125,165,1)"
+        ];
     }
     getLengthByDegree(degree){
         return acos(degree) * this.size / 2;
