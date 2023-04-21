@@ -68,6 +68,6 @@ class Sticker {
                 this.units[idx].draw(deg);
             }
         }
-        
+        // this.units[0].draw(deg);
     }
 }

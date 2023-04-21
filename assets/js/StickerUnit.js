@@ -56,29 +56,29 @@ class StickerUnit {
             this.wrapper.appendChild(f);
         }
         this.fragmentsFill = [
-            "rbga(235,170,205,1)", 
-            "rbga(245,255,75,1)", 
-            "rbga(0,240,220,1)", 
-            "rbga(75,125,165,1)", 
-            "rbga(100,125,130,1)", 
-            "rbga(75,90,85,1)", 
-            "rbga(100,125,130,1)", 
-            "rbga(75,125,165,1)",
-            "rbga(235,170,205,1)", 
-            "rbga(245,255,75,1)", 
-            "rbga(0,240,220,1)", 
-            "rbga(75,125,165,1)", 
-            "rbga(100,125,130,1)", 
-            "rbga(75,90,85,1)", 
-            "rbga(100,125,130,1)", 
-            "rbga(75,125,165,1)"
+            "rgba(235,170,205,1)", 
+            "rgba(245,255,75,1)", 
+            "rgba(0,240,220,1)", 
+            "rgba(75,125,165,1)", 
+            "rgba(100,125,130,1)", 
+            "rgba(75,90,85,1)", 
+            "rgba(100,125,130,1)", 
+            "rgba(75,125,165,1)",
+            "rgba(235,170,205,1)", 
+            "rgba(245,255,75,1)", 
+            "rgba(0,240,220,1)", 
+            "rgba(75,125,165,1)", 
+            "rgba(100,125,130,1)", 
+            "rgba(75,90,85,1)", 
+            "rgba(100,125,130,1)", 
+            "rgba(75,125,165,1)"
         ];
     }
     getLengthByDegree(degree){
         return acos(degree) * this.size / 2;
     }
     drawFragments(deg){
-        // console.log("drawFragments");
+        console.log("drawFragments");
         let l = this.size * 1.414 / 2;
         let idx = parseInt(deg / this.fragmentInterval);
         // if(idx == this.beginIdx) return;
