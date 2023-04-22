@@ -43,14 +43,6 @@ class StickerUnit {
                 transform-origin: bottom left;
                 transform: rotate( ${this.fragmentInterval * i}deg );
             `;
-            // f.style.cssText = `
-            //     width: 71%;
-            //     height: 71%;
-            //     position: absolute;
-            //     bottom: 50%;
-            //     left: 50%;
-            //     transform-origin: bottom left;
-            // `;
             f.style.cssText += i == this.fragmentsNum - 1 ? 'clip-path: polygon(0% 0%, 100% 0%, 0% 100%)' : '';
             this.fragments.push(f);
             this.wrapper.appendChild(f);

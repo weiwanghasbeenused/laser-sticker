@@ -6,7 +6,7 @@ class Sticker {
         this.init();
     }
     init(){
-        this.unitSizeRange = { 'min': 30, "max": 120 };
+        this.unitSizeRange = { 'min': 30, "max": 80 };
         this.unitSize = this.getStickerUnitSize();
         this.unitAmount = this.getStickerUnitAmount(this.unitSize);
         for(let i = 0; i < this.unitAmount.v; i++)
@@ -50,8 +50,6 @@ class Sticker {
 
     draw(b=0, g=0){
         console.log('sticker draw');
-        // let beta = b * Math.PI * 2 / 360;
-        // let gamma = g * Math.PI * 2 / 360;
         let beta = b;
         let gamma = g;
         let deg = (beta + gamma) * 8;
@@ -65,6 +63,5 @@ class Sticker {
                 this.units[idx].draw(deg);
             }
         }
-        // this.units[0].draw(deg);
     }
 }
