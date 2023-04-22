@@ -74,10 +74,12 @@
 }
 #sticker-image-cotainer
 {
-    background-image: url(assets/images/nee.jpg);
+    background-image: url(../images/nee.jpg);
     background-size: cover;
     background-blend-mode: multiply;
+    opacity: 0.75;
     position: absolute;
     top: 0;
     left: 0;
+    background-position: center center;
 }
