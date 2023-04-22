@@ -72,3 +72,12 @@
     background-color: #f00;
     color: #fff;
 }
+#sticker-image-cotainer
+{
+    background-image: url(assets/images/nee.jpg);
+    background-size: cover;
+    background-blend-mode: multiply;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
