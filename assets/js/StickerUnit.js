@@ -132,6 +132,7 @@ class StickerUnit {
         console.log("drawFragments");
         let l = this.size * 1.414 / 2;
         let idx = parseInt(rad / this.fragmentInterval);
+        if(idx ==  beginIdx) return;
         this.beginIdx = idx;
         for(let i = 0; i < this.fragments.length; i++){
             idx = (idx + 1) % this.fragmentsNum;
