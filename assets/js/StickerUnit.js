@@ -37,16 +37,38 @@ class StickerUnit {
             let a = i <= this.fragmentsNum / 2 ? a_interval * i : 1 - a_interval * (i - this.fragmentsNum / 2);
             let f = document.createElement("DIV");
             let clipPath = '0 100%, 100% 100%, 100% ' + (1 - parseFloat(Math.tan(this.fragmentInterval * Math.PI * 2 / 360).toFixed(3))) * 100 + '%';
-            if(this.fragmentsNum == 4) clipPath = '0 100%, 100% 100%, 100% 0, 0 0';
+            if(this.fragmentsNum == 4) {
+                if(i == 0){
+                    clipPath = '0 0, 50% 0, 50% 50%, 0 50%';
+                }
+                else if(i == 1){
+                    clipPath = '50% 0, 100% 0, 100% 50%, 50% 50%';
+                }
+                else if(i == 2){
+                    clipPath = '50% 50%, 100% 50%, 100% 100%, 50% 100%';
+                }
+                else if(i == 3){
+                    clipPath = '0 50%, 50% 50%, 50% 100%, 0 100%';
+                }
+                
+            }
+            // f.style.cssText = `
+            //     width: 71%;
+            //     height: 71%;
+            //     position: absolute;
+            //     bottom: 50%;
+            //     left: 50%;
+            //     clip-path: polygon(${clipPath});
+            //     transform-origin: bottom left;
+            //     transform: rotate(${this.fragmentInterval * i}deg);
+            // `;
             f.style.cssText = `
-                width: 71%;
-                height: 71%;
+                width: 100%;
+                height: 100%;
                 position: absolute;
-                bottom: 50%;
-                left: 50%;
+                bottom: 0;
+                left: 0;
                 clip-path: polygon(${clipPath});
-                transform-origin: bottom left;
-                transform: rotate(${this.fragmentInterval * i}deg);
             `;
             this.fragments.push(f);
             this.wrapper.appendChild(f);
