@@ -12,7 +12,7 @@ class StickerUnit {
             overflow: hidden;  
         `;
         this.fragments = [];
-        this.fragmentsNum = 4;
+        this.fragmentsNum = 16;
         this.fragmentsFill = [];
         this.beginIdx = 0;
         this.center = {
@@ -23,53 +23,89 @@ class StickerUnit {
         
     }
     init(){
-        this.fragmentInterval = 360 / this.fragmentsNum;
+        this.fragmentInterval = 2 * Math.PI / this.fragmentsNum;
         this.prepareFragments();
         this.stickerContainer.appendChild(this.wrapper);
     }
+    getAxisByRad(rad){
+        // degree = degree % (Math.PI * 2);
+        let x = this.center.x;
+        let y = this.center.y;
+        let l = 141.4 / 2;
+        if(rad <= Math.PI * 1 / 4 ) {
+            // 0 - 45
+            x += l;
+            y -= Math.tan(rad) * l;
+        }
+        else if( rad > Math.PI * 1 / 4 && rad <= Math.PI * 2 / 4 ) {
+            // 45 - 90
+            rad = Math.PI / 2 - rad;
+            x += Math.tan(rad) * l;
+            y -= l;
+        }
+        else if( rad > Math.PI * 2 / 4 && rad <= Math.PI * 3 / 4 ) {
+            // 90 - 135
+            rad = rad - Math.PI / 2;
+            x -= Math.tan(rad) * l;
+            y -= l;
+        }
+        else if( rad > Math.PI * 3 / 4 && rad <= Math.PI ) {
+            // 135 - 180
+            rad = Math.PI - rad;
+            x -= l;
+            y -= Math.tan(rad) * l;
+        }
+        else if( rad > Math.PI && rad <= Math.PI * 5 / 4 ) {
+            // 180 - 225
+            rad = rad - Math.PI;
+            x -= l;
+            y += Math.tan(rad) * l;
+        }
+        else if( rad > Math.PI * 5 / 4 && rad <= Math.PI * 6 / 4 ) {
+            // 225 - 270
+            rad = Math.PI * 3 / 2 - rad;
+            x -= Math.tan(rad) * l;
+            y += l;
+        }
+        else if( rad > Math.PI * 6 / 4 && rad <= Math.PI * 7 / 4 ) {
+            // 270 - 315
+            rad = rad - Math.PI * 3 / 2;
+            x += Math.tan(rad) * l;
+            y += l;
+        }
+        else{
+            // 315 - 360
+            rad = Math.PI * 2  - rad;
+            x += l;
+            y += Math.tan(rad) * l;
+        }
+        let output = parseFloat(x.toFixed(2)) + '% ' + parseFloat(y.toFixed(2)) + '%';
+        return output;
+    }
+    getClipPath(beginRad){
+        let output = 'polygon(50% 50%,';
+        output += this.getAxisByRad(beginRad) + ', ';
+        output += this.getAxisByRad(beginRad + this.fragmentInterval) + ')';
+        return output;
+    }
     prepareFragments(){
         let a_interval = 1 / this.fragmentsNum * 2;
-        console.log(this.fragmentInterval);
-        console.log(Math.tan( this.fragmentInterval * Math.PI / 180) );
-        // console.log(a_interval);
+
         for(let i = 0; i < this.fragmentsNum; i++)
         {
             let a = i <= this.fragmentsNum / 2 ? a_interval * i : 1 - a_interval * (i - this.fragmentsNum / 2);
             let f = document.createElement("DIV");
-            let clipPath = '0 100%, 100% 100%, 100% ' + (1 - parseFloat(Math.tan(this.fragmentInterval * Math.PI * 2 / 360).toFixed(3))) * 100 + '%';
-            if(this.fragmentsNum == 4) {
-                if(i == 0){
-                    clipPath = '0 0, 50% 0, 50% 50%, 0 50%';
-                }
-                else if(i == 1){
-                    clipPath = '50% 0, 100% 0, 100% 50%, 50% 50%';
-                }
-                else if(i == 2){
-                    clipPath = '50% 50%, 100% 50%, 100% 100%, 50% 100%';
-                }
-                else if(i == 3){
-                    clipPath = '0 50%, 50% 50%, 50% 100%, 0 100%';
-                }
-                
-            }
-            // f.style.cssText = `
-            //     width: 71%;
-            //     height: 71%;
-            //     position: absolute;
-            //     bottom: 50%;
-            //     left: 50%;
-            //     clip-path: polygon(${clipPath});
-            //     transform-origin: bottom left;
-            //     transform: rotate(${this.fragmentInterval * i}deg);
-            // `;
+            let clipPath = this.getClipPath(this.fragmentInterval * i);
+            console.log(clipPath);
             f.style.cssText = `
-                width: 100%;
-                height: 100%;
+                width: 141.2%;
+                height: 141.2%;
                 position: absolute;
-                bottom: 0;
-                left: 0;
-                clip-path: polygon(${clipPath});
+                top: -20.6%;
+                left: -20.6%;
+                clip-path: ${clipPath};
             `;
+
             this.fragments.push(f);
             this.wrapper.appendChild(f);
         }
@@ -92,13 +128,10 @@ class StickerUnit {
             "rgba(75,125,165,0.6)"
         ];
     }
-    getLengthByDegree(degree){
-        return acos(degree) * this.size / 2;
-    }
-    drawFragments(deg){
+    drawFragments(rad){
         console.log("drawFragments");
         let l = this.size * 1.414 / 2;
-        let idx = parseInt(deg / this.fragmentInterval);
+        let idx = parseInt(rad / this.fragmentInterval);
         this.beginIdx = idx;
         for(let i = 0; i < this.fragments.length; i++){
             idx = (idx + 1) % this.fragmentsNum;
@@ -110,7 +143,7 @@ class StickerUnit {
             this.fragments[idx].style.backgroundColor = this.fragmentsFill[i];
         }
     }
-    draw(deg = 0){
-        this.drawFragments(deg);
+    draw(rad = 0){
+        this.drawFragments(rad);
     }
 }

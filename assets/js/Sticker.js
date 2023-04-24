@@ -52,15 +52,16 @@ class Sticker {
         console.log('sticker draw');
         let beta = b;
         let gamma = g;
-        let deg = (beta + gamma) * 8;
-        if(this.fragmentIdx === parseInt(deg / this.unitFragmentInterval)) return;
-        this.fragmentIdx = parseInt(deg / this.unitFragmentInterval);
+        let rad = (beta + gamma) * 8;
+        rad = rad * Math.PI / 180;
+        if(this.fragmentIdx === parseInt(rad / this.unitFragmentInterval)) return;
+        this.fragmentIdx = parseInt(rad / this.unitFragmentInterval);
         for(let i = 0; i < this.unitAmount.v; i++)
         {
             for(let j = 0; j < this.unitAmount.h; j++)
             {
                 let idx = this.unitAmount.h * i + j;
-                this.units[idx].draw(deg);
+                this.units[idx].draw(rad);
             }
         }
     }
