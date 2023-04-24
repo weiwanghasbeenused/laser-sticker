@@ -96,7 +96,6 @@ class StickerUnit {
             let a = i <= this.fragmentsNum / 2 ? a_interval * i : 1 - a_interval * (i - this.fragmentsNum / 2);
             let f = document.createElement("DIV");
             let clipPath = this.getClipPath(this.fragmentInterval * i);
-            console.log(clipPath);
             f.style.cssText = `
                 width: 141.2%;
                 height: 141.2%;
@@ -129,7 +128,7 @@ class StickerUnit {
         ];
     }
     drawFragments(rad){
-        console.log("drawFragments");
+        // console.log("drawFragments");
         let l = this.size * 1.414 / 2;
         let idx = parseInt(rad / this.fragmentInterval);
         if(idx ==  this.beginIdx) return;

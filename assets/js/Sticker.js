@@ -49,7 +49,7 @@ class Sticker {
     }
 
     draw(b=0, g=0){
-        console.log('sticker draw');
+        // console.log('sticker draw');
         let beta = b;
         let gamma = g;
         let rad = (beta + gamma) * 8;
