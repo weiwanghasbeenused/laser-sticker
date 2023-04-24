@@ -12,7 +12,7 @@ class StickerUnit {
             overflow: hidden;  
         `;
         this.fragments = [];
-        this.fragmentsNum = 16;
+        this.fragmentsNum = 4;
         this.fragmentsFill = [];
         this.beginIdx = 0;
         this.center = {
@@ -29,12 +29,15 @@ class StickerUnit {
     }
     prepareFragments(){
         let a_interval = 1 / this.fragmentsNum * 2;
+        console.log(this.fragmentInterval);
+        console.log(Math.tan( this.fragmentInterval * Math.PI / 180) );
         // console.log(a_interval);
         for(let i = 0; i < this.fragmentsNum; i++)
         {
             let a = i <= this.fragmentsNum / 2 ? a_interval * i : 1 - a_interval * (i - this.fragmentsNum / 2);
             let f = document.createElement("DIV");
             let clipPath = '0 100%, 100% 100%, 100% ' + (1 - parseFloat(Math.tan(this.fragmentInterval * Math.PI * 2 / 360).toFixed(3))) * 100 + '%';
+            if(this.fragmentsNum == 4) clipPath = '0 100%, 100% 100%, 100% 0, 0 0';
             f.style.cssText = `
                 width: 71%;
                 height: 71%;
