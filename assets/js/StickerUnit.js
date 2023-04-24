@@ -15,14 +15,14 @@ class StickerUnit {
         this.fragmentsNum = 16;
         this.fragmentsFill = [];
         this.beginIdx = 0;
+        this.center = {
+            "x": 50,
+            "y": 50
+        };
         this.init();
         
     }
     init(){
-        // this.center = {
-        //     "x": this.position.x + this.size / 2,
-        //     "y": this.position.y + this.size / 2
-        // };
         this.fragmentInterval = 360 / this.fragmentsNum;
         this.prepareFragments();
         this.stickerContainer.appendChild(this.wrapper);
@@ -34,36 +34,37 @@ class StickerUnit {
         {
             let a = i <= this.fragmentsNum / 2 ? a_interval * i : 1 - a_interval * (i - this.fragmentsNum / 2);
             let f = document.createElement("DIV");
+            let clipPath = '0 100%, 100% 100%, 100% ' + (1 - Math.tan(this.fragmentInterval * Math.PI * 2 / 360)) * 100 + '%';
             f.style.cssText = `
                 width: 71%;
                 height: 71%;
                 position: absolute;
                 bottom: 50%;
                 left: 50%;
+                clip-path: polygon(${clipPath});
                 transform-origin: bottom left;
-                transform: rotate( ${this.fragmentInterval * i}deg );
+                transform: rotate(${this.fragmentInterval * i}deg);
             `;
-            f.style.cssText += i == this.fragmentsNum - 1 ? 'clip-path: polygon(0% 0%, 100% 0%, 0% 100%)' : '';
             this.fragments.push(f);
             this.wrapper.appendChild(f);
         }
         this.fragmentsFill = [
-            "rgba(235,170,205,1)", 
-            "rgba(245,255,75,1)", 
-            "rgba(0,240,220,1)", 
-            "rgba(75,125,165,1)", 
-            "rgba(100,125,130,1)", 
-            "rgba(75,90,85,1)", 
-            "rgba(100,125,130,1)", 
-            "rgba(75,125,165,1)",
-            "rgba(235,170,205,1)", 
-            "rgba(245,255,75,1)", 
-            "rgba(0,240,220,1)", 
-            "rgba(75,125,165,1)", 
-            "rgba(100,125,130,1)", 
-            "rgba(75,90,85,1)", 
-            "rgba(100,125,130,1)", 
-            "rgba(75,125,165,1)"
+            "rgba(235,170,205,0.85)", 
+            "rgba(245,255,75,0.95)", 
+            "rgba(0,240,220,0.85)", 
+            "rgba(75,125,165,0.6)", 
+            "rgba(100,125,130,0.6)", 
+            "rgba(75,90,85,0.5)", 
+            "rgba(100,125,130,0.6)", 
+            "rgba(75,125,165,0.6)",
+            "rgba(235,170,205,0.85)", 
+            "rgba(245,255,75,0.95)", 
+            "rgba(0,240,220,0.85)", 
+            "rgba(75,125,165,0.6)", 
+            "rgba(100,125,130,0.6)", 
+            "rgba(75,90,85,0.5)", 
+            "rgba(100,125,130,0.6)", 
+            "rgba(75,125,165,0.6)"
         ];
     }
     getLengthByDegree(degree){
@@ -73,13 +74,12 @@ class StickerUnit {
         console.log("drawFragments");
         let l = this.size * 1.414 / 2;
         let idx = parseInt(deg / this.fragmentInterval);
-        // if(idx == this.beginIdx) return;
         this.beginIdx = idx;
         for(let i = 0; i < this.fragments.length; i++){
             idx = (idx + 1) % this.fragmentsNum;
             if(!this.fragments[idx])
             {
-                console.log("!! " + idx);
+                // console.log("!! " + idx);
                 continue;
             }
             this.fragments[idx].style.backgroundColor = this.fragmentsFill[i];
