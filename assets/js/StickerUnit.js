@@ -34,7 +34,7 @@ class StickerUnit {
         {
             let a = i <= this.fragmentsNum / 2 ? a_interval * i : 1 - a_interval * (i - this.fragmentsNum / 2);
             let f = document.createElement("DIV");
-            let clipPath = '0 100%, 100% 100%, 100% ' + (1 - Math.tan(this.fragmentInterval * Math.PI * 2 / 360)) * 100 + '%';
+            let clipPath = '0 100%, 100% 100%, 100% ' + (1 - parseFloat(Math.tan(this.fragmentInterval * Math.PI * 2 / 360).toFixed(3))) * 100 + '%';
             f.style.cssText = `
                 width: 71%;
                 height: 71%;
