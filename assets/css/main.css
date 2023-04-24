@@ -82,4 +82,5 @@
     top: 0;
     left: 0;
     background-position: center center;
+    z-index:-1;
 }
